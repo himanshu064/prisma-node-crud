@@ -1,8 +1,13 @@
 const express = require('express');
-require("dotenv").config()
+require("dotenv").config();
 const productRoutes = require('./routes/productRoutes');
+const swaggerMiddleware = require('./swagger/swaggerMiddleware'); 
+const cors = require('cors');
 const app = express();
+app.use(cors());
 app.use(express.json());
+
+swaggerMiddleware(app);
 
 app.use('/', productRoutes);
 
