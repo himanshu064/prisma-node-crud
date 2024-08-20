@@ -1,4 +1,3 @@
-// src/routes/productRoutes.js
 const express = require('express');
 const productController = require('../controllers/productController');
 const { createProductValidation, updateProductValidation,createMultiProductValidation } = require('../utils/validate/productValidation');

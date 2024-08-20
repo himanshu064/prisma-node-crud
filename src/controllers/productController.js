@@ -95,7 +95,7 @@ exports.getAllProducts = async (req, res) => {
     page_size = 10,
     sort_order = "desc",
     search,
-    sort_by = "createdAt",
+    sort_by = ["createdAt"],
   } = req.query;
   try {
     const sortFields = sort_by.map((field) => ({
@@ -142,9 +142,7 @@ exports.getAllProducts = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   let { id, name, price, color } = req.query;
   try {
-    const product = await prisma.product.findUnique({
-      where: { id },
-    });
+    
     if (!isValidObjectId(id)) {
       return res.status(400).send({
         status: "failed",
@@ -153,6 +151,9 @@ exports.updateProduct = async (req, res) => {
         data: [],
       });
     }
+    const product = await prisma.product.findUnique({
+      where: { id },
+    });
     if (product) {
       let updatedProduct = await prisma.product.update({
         where: { id: id },
