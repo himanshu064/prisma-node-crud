@@ -1,7 +1,8 @@
-const express = require('express');
-const productController = require('../controllers/productController');
-const { createProductValidation, updateProductValidation,createMultiProductValidation } = require('../utils/validate/productValidation');
-const validateMiddleware = require('../utils/validate/validateMiddleware');
+import express from 'express';
+import * as productController from '../controllers/productController';
+import { createProductValidation, updateProductValidation, createMultiProductValidation } from '../utils/validate/productValidation';
+import validateMiddleware from '../utils/validate/validateMiddleware';
+
 const router = express.Router();
 
 router.post('/product', createProductValidation, validateMiddleware, productController.createProduct);
@@ -11,4 +12,4 @@ router.get('/products', productController.getAllProducts);
 router.put('/products', updateProductValidation, validateMiddleware, productController.updateProduct);
 router.delete('/products/:id', productController.deleteProduct);
 
-module.exports = router;
+export default router;
