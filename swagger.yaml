@@ -224,11 +224,3 @@ components:
         price:
           type: number
           description: The price of the product
-        createdAt:
-          type: string
-          format: date-time
-          description: The creation date of the product
-        updatedAt:
-          type: string
-          format: date-time
-          description: The last update date of the product
