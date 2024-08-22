@@ -10,7 +10,7 @@ prisma-node-crud is a simple CRUD (Create, Read, Update, Delete) application bui
 
 Before you begin, ensure you have the following installed:
 - [Node.js](https://nodejs.org/) (version 14 or higher)
-- [npm](https://www.npmjs.com/) (Node Package Manager)
+- [Npm](https://www.npmjs.com/) (Node Package Manager)
 - A [MongoDB](https://www.mongodb.com/) database (either a local instance or a MongoDB Atlas cloud database)
 ## Installation
 
@@ -35,3 +35,38 @@ PORT=
 ```bash
 npm start
 ```
+
+## Swagger Testing
+This project includes a swagger.yaml file that defines the API endpoints, request parameters, and responses in a standardized OpenAPI format. You can use this file to test and document the API.
+
+### Using the swagger.yaml File
+1. **Use an Online Swagger Editor:**
+- Visit the [Swagger Editor](https://editor.swagger.io/).
+- Copy the contents of the swagger.yaml file from your project.
+- Paste the contents into the editor.
+- The Swagger Editor will display the API documentation, allowing you to interact with and test the API endpoints directly from the browser.
+
+## Postman Collection for API Testing
+
+To make API testing easier, a Postman collection is provided for this project. This collection includes all the necessary endpoints and can be used to quickly test the API without manually configuring each request.
+
+### Importing the Postman Collection
+
+Follow these steps to import the Postman collection:
+
+1. **Download the Postman Collection:**
+
+   - The Postman collection file (`product-api-collection.json`) is included in the repository.
+
+2. **Import the Collection into Postman:**
+
+   - Open Postman.
+   - Click on the "Import" button in the top left corner.
+   - Select the `product-api-collection.json` file from your local machine.
+   - Click "Open" to import the collection.
+
+3. **Start Testing:**
+
+   - Once the collection is imported, you can start making requests to the API endpoints defined in the collection. Each request includes predefined settings for method, URL, headers, and body, making it easier to test the API.
+---
+

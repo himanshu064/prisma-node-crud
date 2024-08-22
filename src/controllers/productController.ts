@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import prisma from '../models/model';
 import { isValidObjectId } from '../utils/functions/commonFunctions';
-
-export const createProduct = async (req: Request, res: Response): Promise<void> => {
+import {requestResponse,CreateProductBody} from "../types/responseTypes"
+export const createProduct = async (req: Request<{},{},CreateProductBody>, res: Response) => {
   const { name, color, price } = req.body;
   try {
     const newProduct = await prisma.product.create({
@@ -29,13 +29,13 @@ export const createProduct = async (req: Request, res: Response): Promise<void> 
   }
 };
 
-export const createManyProduct = async (req: Request, res: Response): Promise<any> => {
+export const createManyProduct = async (req: Request, res: Response) : Promise<Response<requestResponse>|void> => {
   const products = req.body;
   try {
     await prisma.product.createMany({
       data: products,
     });
-   return res.status(200).send({
+    res.status(200).send({
       status: 'success',
       statusCode: 200,
       message: 'Products added successfully',
@@ -52,7 +52,7 @@ export const createManyProduct = async (req: Request, res: Response): Promise<an
   }
 };
 
-export const getProduct = async (req: Request, res: Response): Promise<any> => {
+export const getProduct = async (req: Request, res: Response): Promise<Response<requestResponse>|void> => {
   const { id } = req.params;
   try {
     if (!id || !isValidObjectId(id)) {
@@ -67,14 +67,14 @@ export const getProduct = async (req: Request, res: Response): Promise<any> => {
       where: { id },
     });
     if (product) {
-      res.status(200).json({
+    return  res.status(200).json({
         status: 'success',
         statusCode: 200,
         message: 'Product found successfully',
         data: product,
       });
     } else {
-      res.status(404).json({
+   return   res.status(404).json({
         status: 'failed',
         statusCode: 404,
         message: 'Product not found',
@@ -90,7 +90,7 @@ export const getProduct = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
-export const getAllProducts = async (req: Request, res: Response): Promise<any> => {
+export const getAllProducts = async (req: Request, res: Response): Promise<Response<requestResponse>|void> => {
   const {
     page = '1',
     page_size = '10',
@@ -150,7 +150,7 @@ export const getAllProducts = async (req: Request, res: Response): Promise<any> 
   }
 };
 
-export const updateProduct = async (req: Request, res: Response): Promise<any> => {
+export const updateProduct = async (req: Request, res: Response): Promise<Response<requestResponse>|void> => {
   const { id, name, price, color } = req.query as {
     id?: string;
     name?: string;
@@ -179,14 +179,14 @@ export const updateProduct = async (req: Request, res: Response): Promise<any> =
           color,
         },
       });
-      res.status(200).json({
+   return   res.status(200).json({
         status: 'success',
         statusCode: 200,
         message: 'Product updated successfully',
         data: updatedProduct,
       });
     } else {
-      res.status(404).json({
+   return   res.status(404).json({
         status: 'failed',
         statusCode: 404,
         message: 'Product not found',
@@ -204,7 +204,7 @@ export const updateProduct = async (req: Request, res: Response): Promise<any> =
   }
 };
 
-export const deleteProduct = async (req: Request, res: Response): Promise<any> => {
+export const deleteProduct = async (req: Request, res: Response): Promise<Response<requestResponse>|void> => {
   const { id } = req.params;
   try {
     if (!id || !isValidObjectId(id)) {
@@ -223,14 +223,14 @@ export const deleteProduct = async (req: Request, res: Response): Promise<any> =
       await prisma.product.delete({
         where: { id },
       });
-      res.status(200).json({
+   return   res.status(200).json({
         status: 'success',
         statusCode: 200,
         message: 'Product deleted successfully',
         data: [],
       });
     } else {
-      res.status(404).json({
+  return    res.status(404).json({
         status: 'failed',
         statusCode: 404,
         message: 'Product not found',
