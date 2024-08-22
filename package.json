@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "node init && nodemon src/index.ts",
     "migrate": "npx prisma migrate",
     "postinstall": "npx prisma generate"
   },
@@ -17,6 +17,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-validator": "^7.2.0",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.1.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
