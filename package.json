@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "node init && nodemon src/index.ts",
+    "start": "nodemon src/index.ts",
     "migrate": "npx prisma migrate",
     "postinstall": "npx prisma generate"
   },
